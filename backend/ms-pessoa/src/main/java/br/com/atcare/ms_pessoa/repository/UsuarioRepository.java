@@ -8,11 +8,6 @@ import org.springframework.stereotype.Repository;
  * Repositório responsável pelo acesso aos dados da entidade {@link Usuario}.
  *
  * <p>
- * Em arquitetura multi-tenant, todos os usuários são isolados
- * por empresa (tenant), identificada pelo campo {@code empresaId}.
- * </p>
- *
- * <p>
  * Este repositório contém apenas consultas relacionadas
  * ao ciclo de autenticação, autorização e administração de usuários.
  * </p>

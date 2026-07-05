@@ -11,10 +11,6 @@ import java.util.Optional;
 
 /**
  * Repositório responsável pelo acesso aos dados da entidade {@link Documento}.
- * <p>
- * Permite a consulta e gerenciamento de documentos pessoais ou empresariais,
- * como CPF, RG, CNPJ e demais identificações formais vinculadas às pessoas
- * cadastradas no ATCARE.
  */
 @Repository
 public interface DocumentoRepository extends JpaRepository<Documento, Long> { }

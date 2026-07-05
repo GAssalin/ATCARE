@@ -13,11 +13,6 @@ import java.util.Optional;
 /**
  * Repositório responsável pelo acesso aos dados da entidade {@link Contato}.
  * <p>
- * Centraliza consultas relacionadas aos meios de contato de uma pessoa,
- * respeitando o contexto multi-tenant (empresa).
- * </p>
- *
- * <p>
  * Este repositório é amplamente utilizado em fluxos de:
  * <ul>
  *     <li>Cadastro e manutenção de pessoas</li>
