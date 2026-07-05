@@ -1,0 +1,23 @@
+package br.com.atcare.ms_pessoa.repository;
+
+import br.com.atcare.ms_pessoa.model.entity.Usuario;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+/**
+ * Repositório responsável pelo acesso aos dados da entidade {@link Usuario}.
+ *
+ * <p>
+ * Em arquitetura multi-tenant, todos os usuários são isolados
+ * por empresa (tenant), identificada pelo campo {@code empresaId}.
+ * </p>
+ *
+ * <p>
+ * Este repositório contém apenas consultas relacionadas
+ * ao ciclo de autenticação, autorização e administração de usuários.
+ * </p>
+ */
+@Repository
+public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+
+}

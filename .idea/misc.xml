@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/ms-autenticacao/pom.xml" />
+        <option value="$PROJECT_DIR$/ms-cliente/pom.xml" />
+        <option value="$PROJECT_DIR$/ms-pessoas/pom.xml" />
+        <option value="$PROJECT_DIR$/ms-usuario/pom.xml" />
+        <option value="$PROJECT_DIR$/service-registry/pom.xml" />
+        <option value="$PROJECT_DIR$/atcare-core/pom.xml" />
+        <option value="$PROJECT_DIR$/backend/atcare-core/pom.xml" />
+        <option value="$PROJECT_DIR$/backend/gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/backend/ms-autenticacao/pom.xml" />
+        <option value="$PROJECT_DIR$/backend/ms-cliente/pom.xml" />
+        <option value="$PROJECT_DIR$/backend/ms-pessoas/pom.xml" />
+        <option value="$PROJECT_DIR$/backend/ms-usuario/pom.xml" />
+        <option value="$PROJECT_DIR$/backend/service-registry/pom.xml" />
+        <option value="$PROJECT_DIR$/backend/ms-autenticacao/ms-autenticacao/pom.xml" />
+        <option value="$PROJECT_DIR$/backend/atcare-core/core-auth/pom.xml" />
+        <option value="$PROJECT_DIR$/backend/ms-pessoa/pom.xml" />
+      </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/backend/ms-cliente/pom.xml" />
+        <option value="$PROJECT_DIR$/backend/ms-pessoas/pom.xml" />
+        <option value="$PROJECT_DIR$/backend/ms-usuario/pom.xml" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="21" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

@@ -1,0 +1,68 @@
+package br.com.atcare.ms_pessoa.model.entity;
+
+import br.com.atcare.core.base.model.EntidadeAuditavel;
+import br.com.atcare.ms_pessoa.model.enums.TipoDocumento;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+
+import java.time.LocalDate;
+
+/**
+ * Representa um documento pertencente a uma pessoa dentro do ATCARE.
+ * <p>
+ * Permite armazenar documentos como CPF, RG, CNPJ e outros,
+ * possibilitando validações e integrações corporativas.
+ */
+@Entity
+@Table(name = "documento")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@SuperBuilder
+public class Documento extends EntidadeAuditavel {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    /**
+     * Pessoa proprietária do documento.
+     */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "pessoa_id", nullable = false)
+    private Pessoa pessoa;
+
+    /**
+     * Tipo do documento (CPF, RG, CNPJ, etc.).
+     */
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_documento", nullable = false, length = 20)
+    private TipoDocumento tipo;
+
+    /**
+     * Número do documento, sem formatação.
+     */
+    @NotBlank
+    @Column(nullable = false, length = 50)
+    private String numero;
+
+    /**
+     * Órgão emissor, quando aplicável.
+     */
+    @Column(name = "orgao_emissor", length = 50)
+    private String orgaoEmissor;
+
+    /**
+     * Data de emissão, quando disponível.
+     */
+    @Column(name = "data_emissao")
+    private LocalDate dataEmissao;
+}
