@@ -50,17 +50,15 @@ public abstract class EntidadeAuditavel {
 
     @PrePersist
     public void prePersist() {
-        if (this.criadoEm == null) {
+        if (this.criadoEm == null)
             this.criadoEm = LocalDateTime.now();
-        }
-
-        if (this.ativo == null) {
+        if (this.ativo == null)
             this.ativo = true;
-        }
     }
 
     @PreUpdate
     public void preUpdate() {
         this.atualizadoEm = LocalDateTime.now();
     }
+
 }

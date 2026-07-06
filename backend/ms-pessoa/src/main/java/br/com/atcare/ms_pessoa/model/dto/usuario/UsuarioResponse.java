@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
  */
 public record UsuarioResponse(
         Long id,
-        String login,
         Long pessoaId,
         String email,
         boolean emailVerificado,

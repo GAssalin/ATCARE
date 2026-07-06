@@ -22,7 +22,7 @@ public class AutenticacaoLoader {
 
         return new AuthenticatedUser(
                 user.userId(),
-                user.login(),
+                user.email(),
                 user.passwordHash()
         );
     }
