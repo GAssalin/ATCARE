@@ -31,4 +31,7 @@ public class At extends EntidadeAuditavel {
 
     @OneToMany(mappedBy = "at")
     private List<AtEspecialidade> especialidades;
+
+    @OneToMany(mappedBy = "at")
+    private List<AtDocumento> documentos;
 }
