@@ -45,6 +45,18 @@ public class GatewayConfig {
                         .uri("lb://ms-pessoa")
                 )
 
+                // ===============================
+                // ROTA: MS-PESSOAS (COM JWT)
+                // ===============================
+                .route("ms-at", r -> r
+                        .path("/ms-at/**")
+                        .filters(f -> f
+                                .stripPrefix(1)
+                                .filter(jwtAuthFilter)
+                        )
+                        .uri("lb://ms-at")
+                )
+
                 .build();
     }
 }
