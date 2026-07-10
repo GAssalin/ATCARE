@@ -4,14 +4,17 @@ import br.com.atcare.ms_pessoa.model.entity.Pessoa;
 import br.com.atcare.ms_pessoa.repository.PessoaRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class PessoaService {
 
     private final PessoaRepository repository;
@@ -30,8 +33,13 @@ public class PessoaService {
 
     @Transactional(readOnly = true)
     public Pessoa buscarPorId(Long id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Pessoa não encontrada com id: " + id));
+        Optional<Pessoa> p = repository.findById(id);
+        if(!p.isPresent()) {
+            log.error("Pessoa não encontrada com id: " + id);
+            throw new EntityNotFoundException("Pessoa não encontrada com id: " + id);
+        } else {
+            return p.get();
+        }
     }
 
     @Transactional(readOnly = true)

@@ -21,6 +21,7 @@
         <option value="$PROJECT_DIR$/backend/ms-autenticacao/ms-autenticacao/pom.xml" />
         <option value="$PROJECT_DIR$/backend/atcare-core/core-auth/pom.xml" />
         <option value="$PROJECT_DIR$/backend/ms-pessoa/pom.xml" />
+        <option value="$PROJECT_DIR$/backend/ms-at/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

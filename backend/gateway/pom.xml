@@ -59,6 +59,18 @@
             <version>4.4.0</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>br.com.atcare</groupId>
+            <artifactId>core-base</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>br.com.atcare</groupId>
+            <artifactId>core-auth</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
 	<dependencyManagement>

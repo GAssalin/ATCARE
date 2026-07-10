@@ -1,6 +1,7 @@
 package br.com.atcare.ms_pessoa.handler;
 
 import br.com.atcare.core.base.error.ErroResponse;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -41,5 +42,22 @@ public class GlobalExceptionHandler {
         );
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(erro);
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<ErroResponse> tratarEntityNotFoundException(
+            ResponseStatusException ex,
+            HttpServletRequest request
+    ) {
+        HttpStatusCode status = ex.getStatusCode();
+
+        ErroResponse erro = new ErroResponse(
+                status.value(),
+                HttpStatus.valueOf(status.value()).getReasonPhrase(),
+                ex.getReason(),
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(status).body(erro);
     }
 }

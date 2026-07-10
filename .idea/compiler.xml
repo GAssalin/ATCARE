@@ -30,6 +30,7 @@
         </processorPath>
         <module name="ms-pessoa" />
         <module name="ms-autenticacao" />
+        <module name="ms-at" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -41,6 +42,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="gateway" options="-parameters" />
+      <module name="ms-at" options="-parameters" />
       <module name="ms-autenticacao" options="-parameters" />
       <module name="ms-cliente" options="-parameters" />
       <module name="ms-pessoa" options="-parameters" />

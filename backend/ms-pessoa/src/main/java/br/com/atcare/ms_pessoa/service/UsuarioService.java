@@ -1,5 +1,6 @@
 package br.com.atcare.ms_pessoa.service;
 
+import br.com.atcare.core.usuario.auth.dto.UsuarioAuthResponse;
 import br.com.atcare.ms_pessoa.model.entity.Usuario;
 import br.com.atcare.ms_pessoa.repository.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -32,6 +33,13 @@ public class UsuarioService {
     public Usuario buscarPorId(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Usuario não encontrada com id: " + id));
+    }
+
+    @Transactional(readOnly = true)
+    public UsuarioAuthResponse buscarPorEmail(String email) {
+        Usuario usuario = repository.findByEmail(email)
+                .orElseThrow(() -> new EntityNotFoundException("Usuario não encontrada com email: " + email));
+        return new UsuarioAuthResponse(usuario.getId(), usuario.getEmail(), usuario.getPassword());
     }
 
     @Transactional(readOnly = true)

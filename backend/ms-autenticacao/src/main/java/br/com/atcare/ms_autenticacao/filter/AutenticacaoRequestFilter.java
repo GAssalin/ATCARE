@@ -24,8 +24,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AutenticacaoRequestFilter extends OncePerRequestFilter {
 
-    private TokenCoreService tokenCoreService;
-
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
         String path = request.getServletPath().replace("ms-auth/", "");
@@ -42,44 +40,7 @@ public class AutenticacaoRequestFilter extends OncePerRequestFilter {
             HttpServletResponse response,
             FilterChain filterChain
     ) throws ServletException, IOException {
-        String token = recuperarTokenRequisicao(request);
-
-        if (token != null) {
-
-            DecodedJWT decodedJWT;
-            try {
-                decodedJWT = tokenCoreService.validarToken(token);
-            } catch (Exception ex) {
-                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Token inválido ou expirado");
-            }
-
-            Long pessoaId = decodedJWT.getClaim("pId").asLong();
-            String username = decodedJWT.getSubject();
-
-            AuthenticatedUser principal = new AuthenticatedUser(
-                    pessoaId,
-                    username,
-                    null
-            );
-
-            UserContext.setUsuarioId(pessoaId);
-
-            Authentication authentication = new UsernamePasswordAuthenticationToken(principal, null, List.of());
-
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-        }
-
-        try {
-            filterChain.doFilter(request, response);
-        } finally {
-            UserContext.clear();
-        }
+        filterChain.doFilter(request, response);
     }
 
-    private String recuperarTokenRequisicao(HttpServletRequest request) {
-        String authorizationHeader = request.getHeader("Authorization");
-        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer "))
-            return authorizationHeader.substring(7);
-        return null;
-    }
 }

@@ -23,26 +23,27 @@ public class PessoaRequestFilter extends OncePerRequestFilter {
             HttpServletResponse response,
             FilterChain filterChain
     ) throws ServletException, IOException {
-
-        String pessoaIdHeader = request.getHeader("X-P-Id");
-
-        if (pessoaIdHeader != null) {
-            Long pessoaId = Long.valueOf(pessoaIdHeader);
-
-            UserContext.setUsuarioId(pessoaId);
-
-            UsernamePasswordAuthenticationToken authentication =
-                    new UsernamePasswordAuthenticationToken(
-                            pessoaId,
-                            null,
-                            List.of()
-                    );
-
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-        }
-
         try {
+            String pessoaIdHeader = request.getHeader("X-P-Id");
+
+            if (pessoaIdHeader != null) {
+                Long pessoaId = Long.valueOf(pessoaIdHeader);
+
+                UserContext.setUsuarioId(pessoaId);
+
+                UsernamePasswordAuthenticationToken authentication =
+                        new UsernamePasswordAuthenticationToken(
+                                pessoaId,
+                                null,
+                                List.of()
+                        );
+
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
+
             filterChain.doFilter(request, response);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         } finally {
             UserContext.clear();
             SecurityContextHolder.clearContext();

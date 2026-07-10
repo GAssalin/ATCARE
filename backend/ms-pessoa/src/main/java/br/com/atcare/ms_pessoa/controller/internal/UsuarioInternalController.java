@@ -19,7 +19,7 @@ public class UsuarioInternalController {
 
     @GetMapping("/auth/by-email")
     public UsuarioAuthResponse buscarPorEmail(@RequestParam String email) {
-        return usuarioService.buscarParaAutenticacao(email);
+        return usuarioService.buscarPorEmail(email);
     }
 
 }
