@@ -15,24 +15,26 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class AtDocumento extends EntidadeAuditavel {
+public class Documento extends EntidadeAuditavel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "at_id", nullable = false)
     private At at;
 
-    @Column(nullable = false)
+    @Column(name = "nome", nullable = false, length = 150)
     private String nome;
 
-    @Column(nullable = false)
-    private String tipo;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo", nullable = false, length = 100)
+    private TipoDocumento tipo;
 
-    @Column(nullable = false)
-    private String arquivo;
+    @Column(name = "arquivo_comprovante", nullable = false, length = 500)
+    private String arquivoComprovante;
 
+    @Column(name = "observacao", length = 500)
     private String observacao;
 }

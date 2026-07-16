@@ -20,10 +20,11 @@ public class Certificado extends EntidadeAuditavel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "curso_id", nullable = false)
     private Curso curso;
 
-    @Column(nullable = false)
+    @Column(name = "arquivo", nullable = false, length = 500)
     private String arquivo;
 
     @OneToMany(mappedBy = "certificado")

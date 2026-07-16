@@ -20,18 +20,18 @@ public class At extends EntidadeAuditavel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "pessoa_id", nullable = false, unique = true)
     private Long pessoaId;
 
-    @OneToMany(mappedBy = "at")
+    @OneToMany(mappedBy = "at", fetch = FetchType.LAZY)
     private List<Formacao> formacoes;
 
-    @OneToMany(mappedBy = "at")
+    @OneToMany(mappedBy = "at", fetch = FetchType.LAZY)
     private List<LocalAtendimento> locaisAtendimento;
 
-    @OneToMany(mappedBy = "at")
+    @OneToMany(mappedBy = "at", fetch = FetchType.LAZY)
     private List<AtEspecialidade> especialidades;
 
-    @OneToMany(mappedBy = "at")
-    private List<AtDocumento> documentos;
+    @OneToMany(mappedBy = "at", fetch = FetchType.LAZY)
+    private List<Documento> documentos;
 }

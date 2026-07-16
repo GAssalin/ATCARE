@@ -1,56 +1,22 @@
 package br.com.atcare.ms_at.controller;
 
-import br.com.atcare.ms_at.model.entity.LocalAtendimento;
+import br.com.atcare.ms_at.model.dto.request.LocalAtendimentoRequestDTO;
+import br.com.atcare.ms_at.model.dto.response.LocalAtendimentoResponseDTO;
 import br.com.atcare.ms_at.service.LocalAtendimentoService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
-@RestController
-@RequestMapping("/locais-atendimento")
-@RequiredArgsConstructor
+@RestController @RequestMapping("/api/v1") @RequiredArgsConstructor
 public class LocalAtendimentoController {
-
-    private final LocalAtendimentoService localAtendimentoService;
-
-    @PostMapping
-    public ResponseEntity<LocalAtendimento> criar(@RequestBody LocalAtendimento entity) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(localAtendimentoService.criar(entity));
-    }
-
-    @GetMapping
-    public ResponseEntity<List<LocalAtendimento>> listarTodos() {
-        return ResponseEntity.ok(localAtendimentoService.listarTodos());
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<LocalAtendimento> buscarPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(localAtendimentoService.buscarPorId(id));
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<LocalAtendimento> atualizar(@PathVariable Long id, @RequestBody LocalAtendimento entity) {
-        return ResponseEntity.ok(localAtendimentoService.atualizar(id, entity));
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id) {
-        localAtendimentoService.deletar(id);
-        return ResponseEntity.noContent().build();
-    }
-
-    @PatchMapping("/{id}/ativar")
-    public ResponseEntity<Void> ativar(@PathVariable Long id) {
-        localAtendimentoService.ativar(id);
-        return ResponseEntity.noContent().build();
-    }
-
-    @PatchMapping("/{id}/inativar")
-    public ResponseEntity<Void> inativar(@PathVariable Long id) {
-        localAtendimentoService.inativar(id);
-        return ResponseEntity.noContent().build();
-    }
+    private final LocalAtendimentoService service;
+    @PostMapping("/ats/{atId}/locais-atendimento") public ResponseEntity<LocalAtendimentoResponseDTO> criar(@PathVariable Long atId, @Valid @RequestBody LocalAtendimentoRequestDTO dto) { return ResponseEntity.status(HttpStatus.CREATED).body(service.criar(atId, dto)); }
+    @GetMapping("/locais-atendimento") public ResponseEntity<List<LocalAtendimentoResponseDTO>> listarTodos() { return ResponseEntity.ok(service.listarTodos()); }
+    @GetMapping("/locais-atendimento/{id}") public ResponseEntity<LocalAtendimentoResponseDTO> buscarPorId(@PathVariable Long id) { return ResponseEntity.ok(service.buscarPorId(id)); }
+    @PutMapping("/locais-atendimento/{id}") public ResponseEntity<LocalAtendimentoResponseDTO> atualizar(@PathVariable Long id, @Valid @RequestBody LocalAtendimentoRequestDTO dto) { return ResponseEntity.ok(service.atualizar(id, dto)); }
+    @DeleteMapping("/locais-atendimento/{id}") public ResponseEntity<Void> deletar(@PathVariable Long id) { service.deletar(id); return ResponseEntity.noContent().build(); }
+    @PatchMapping("/locais-atendimento/{id}/ativar") public ResponseEntity<Void> ativar(@PathVariable Long id) { service.ativar(id); return ResponseEntity.noContent().build(); }
+    @PatchMapping("/locais-atendimento/{id}/inativar") public ResponseEntity<Void> inativar(@PathVariable Long id) { service.inativar(id); return ResponseEntity.noContent().build(); }
 }

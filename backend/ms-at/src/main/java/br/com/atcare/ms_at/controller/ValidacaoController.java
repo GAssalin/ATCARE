@@ -1,56 +1,22 @@
 package br.com.atcare.ms_at.controller;
 
-import br.com.atcare.ms_at.model.entity.Validacao;
+import br.com.atcare.ms_at.model.dto.request.ValidacaoRequestDTO;
+import br.com.atcare.ms_at.model.dto.response.ValidacaoResponseDTO;
 import br.com.atcare.ms_at.service.ValidacaoService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
-@RestController
-@RequestMapping("/validacoes")
-@RequiredArgsConstructor
+@RestController @RequestMapping("/api/v1") @RequiredArgsConstructor
 public class ValidacaoController {
-
-    private final ValidacaoService validacaoService;
-
-    @PostMapping
-    public ResponseEntity<Validacao> criar(@RequestBody Validacao entity) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(validacaoService.criar(entity));
-    }
-
-    @GetMapping
-    public ResponseEntity<List<Validacao>> listarTodos() {
-        return ResponseEntity.ok(validacaoService.listarTodos());
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Validacao> buscarPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(validacaoService.buscarPorId(id));
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Validacao> atualizar(@PathVariable Long id, @RequestBody Validacao entity) {
-        return ResponseEntity.ok(validacaoService.atualizar(id, entity));
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id) {
-        validacaoService.deletar(id);
-        return ResponseEntity.noContent().build();
-    }
-
-    @PatchMapping("/{id}/ativar")
-    public ResponseEntity<Void> ativar(@PathVariable Long id) {
-        validacaoService.ativar(id);
-        return ResponseEntity.noContent().build();
-    }
-
-    @PatchMapping("/{id}/inativar")
-    public ResponseEntity<Void> inativar(@PathVariable Long id) {
-        validacaoService.inativar(id);
-        return ResponseEntity.noContent().build();
-    }
+    private final ValidacaoService service;
+    @PostMapping("/certificados/{certificadoId}/validacoes") public ResponseEntity<ValidacaoResponseDTO> criar(@PathVariable Long certificadoId, @Valid @RequestBody ValidacaoRequestDTO dto) { return ResponseEntity.status(HttpStatus.CREATED).body(service.criar(certificadoId, dto)); }
+    @GetMapping("/validacoes") public ResponseEntity<List<ValidacaoResponseDTO>> listarTodos() { return ResponseEntity.ok(service.listarTodos()); }
+    @GetMapping("/validacoes/{id}") public ResponseEntity<ValidacaoResponseDTO> buscarPorId(@PathVariable Long id) { return ResponseEntity.ok(service.buscarPorId(id)); }
+    @PutMapping("/validacoes/{id}") public ResponseEntity<ValidacaoResponseDTO> atualizar(@PathVariable Long id, @Valid @RequestBody ValidacaoRequestDTO dto) { return ResponseEntity.ok(service.atualizar(id, dto)); }
+    @DeleteMapping("/validacoes/{id}") public ResponseEntity<Void> deletar(@PathVariable Long id) { service.deletar(id); return ResponseEntity.noContent().build(); }
+    @PatchMapping("/validacoes/{id}/ativar") public ResponseEntity<Void> ativar(@PathVariable Long id) { service.ativar(id); return ResponseEntity.noContent().build(); }
+    @PatchMapping("/validacoes/{id}/inativar") public ResponseEntity<Void> inativar(@PathVariable Long id) { service.inativar(id); return ResponseEntity.noContent().build(); }
 }

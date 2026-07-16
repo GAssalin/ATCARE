@@ -21,7 +21,7 @@
         <module name="core-base" />
         <module name="core-auth" />
       </profile>
-      <profile name="Annotation profile for ms-pessoa" enabled="true">
+      <profile name="Annotation profile for ms-at" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />

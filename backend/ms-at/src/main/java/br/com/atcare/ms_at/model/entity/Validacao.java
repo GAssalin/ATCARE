@@ -20,15 +20,20 @@ public class Validacao extends EntidadeAuditavel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "certificado_id", nullable = false)
     private Certificado certificado;
 
-    @Column(nullable = false)
-    private Boolean aprovado;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false, length = 20)
+    private StatusValidacao status;
 
+    @Column(name = "observacao", length = 500)
     private String observacao;
 
+    @Column(name = "data_validacao")
     private LocalDateTime dataValidacao;
 
+    @Column(name = "usuario_validador")
     private Long usuarioValidador;
 }

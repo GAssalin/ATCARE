@@ -18,11 +18,24 @@ public class Endereco extends EntidadeAuditavel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "cep", length = 9)
     private String cep;
+
+    @Column(name = "logradouro", length = 150)
     private String logradouro;
+
+    @Column(name = "numero", length = 20)
     private String numero;
+
+    @Column(name = "complemento", length = 100)
     private String complemento;
+
+    @Column(name = "bairro", length = 100)
     private String bairro;
+
+    @Column(name = "cidade", length = 100)
     private String cidade;
+
+    @Column(name = "estado", length = 2)
     private String estado;
 }

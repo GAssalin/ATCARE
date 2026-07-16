@@ -20,15 +20,17 @@ public class Formacao extends EntidadeAuditavel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "at_id", nullable = false)
     private At at;
 
-    @Column(nullable = false)
+    @Column(name = "instituicao", nullable = false, length = 200)
     private String instituicao;
 
-    @Column(nullable = false)
+    @Column(name = "titulo", nullable = false, length = 150)
     private String titulo;
 
+    @Column(name = "ano_conclusao")
     private Integer anoConclusao;
 
     @OneToMany(mappedBy = "formacao")

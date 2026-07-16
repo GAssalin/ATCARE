@@ -18,15 +18,17 @@ public class LocalAtendimento extends EntidadeAuditavel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "at_id", nullable = false)
     private At at;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "endereco_id")
     private Endereco endereco;
 
-    @Column(nullable = false)
+    @Column(name = "atendimento_domiciliar", nullable = false)
     private Boolean atendimentoDomiciliar;
 
-    @Column(nullable = false)
+    @Column(name = "atendimento_online", nullable = false)
     private Boolean atendimentoOnline;
 }

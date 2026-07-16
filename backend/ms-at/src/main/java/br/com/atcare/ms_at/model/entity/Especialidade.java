@@ -6,7 +6,9 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 @Entity
-@Table(name = "especialidade")
+@Table(name = "especialidade", uniqueConstraints = {
+        @UniqueConstraint(name = "uk_especialidade_nome", columnNames = "nome")
+})
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,8 +20,9 @@ public class Especialidade extends EntidadeAuditavel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "nome", nullable = false, unique = true, length = 150)
     private String nome;
 
+    @Column(name = "descricao", length = 500)
     private String descricao;
 }

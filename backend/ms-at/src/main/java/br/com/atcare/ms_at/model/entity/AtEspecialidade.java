@@ -6,7 +6,9 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 @Entity
-@Table(name = "at_especialidade")
+@Table(name = "at_especialidade", uniqueConstraints = {
+        @UniqueConstraint(name = "uk_at_especialidade", columnNames = {"at_id", "especialidade_id"})
+})
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,9 +20,11 @@ public class AtEspecialidade extends EntidadeAuditavel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "at_id", nullable = false)
     private At at;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "especialidade_id", nullable = false)
     private Especialidade especialidade;
 }

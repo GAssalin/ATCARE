@@ -1,7 +1,9 @@
 package br.com.atcare.ms_at.controller;
 
-import br.com.atcare.ms_at.model.entity.At;
+import br.com.atcare.ms_at.model.dto.request.AtRequestDTO;
+import br.com.atcare.ms_at.model.dto.response.AtResponseDTO;
 import br.com.atcare.ms_at.service.AtService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,48 +11,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/ats")
-@RequiredArgsConstructor
+@RestController @RequestMapping("/api/v1/ats") @RequiredArgsConstructor
 public class AtController {
-
-    private final AtService atService;
-
-    @PostMapping
-    public ResponseEntity<At> criar(@RequestBody At entity) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(atService.criar(entity));
-    }
-
-    @GetMapping
-    public ResponseEntity<List<At>> listarTodos() {
-        return ResponseEntity.ok(atService.listarTodos());
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<At> buscarPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(atService.buscarPorId(id));
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<At> atualizar(@PathVariable Long id, @RequestBody At entity) {
-        return ResponseEntity.ok(atService.atualizar(id, entity));
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id) {
-        atService.deletar(id);
-        return ResponseEntity.noContent().build();
-    }
-
-    @PatchMapping("/{id}/ativar")
-    public ResponseEntity<Void> ativar(@PathVariable Long id) {
-        atService.ativar(id);
-        return ResponseEntity.noContent().build();
-    }
-
-    @PatchMapping("/{id}/inativar")
-    public ResponseEntity<Void> inativar(@PathVariable Long id) {
-        atService.inativar(id);
-        return ResponseEntity.noContent().build();
-    }
+    private final AtService service;
+    @PostMapping public ResponseEntity<AtResponseDTO> criar(@Valid @RequestBody AtRequestDTO dto) { return ResponseEntity.status(HttpStatus.CREATED).body(service.criar(dto)); }
+    @GetMapping public ResponseEntity<List<AtResponseDTO>> listarTodos() { return ResponseEntity.ok(service.listarTodos()); }
+    @GetMapping("/{id}") public ResponseEntity<AtResponseDTO> buscarPorId(@PathVariable Long id) { return ResponseEntity.ok(service.buscarPorId(id)); }
+    @PutMapping("/{id}") public ResponseEntity<AtResponseDTO> atualizar(@PathVariable Long id, @Valid @RequestBody AtRequestDTO dto) { return ResponseEntity.ok(service.atualizar(id, dto)); }
+    @DeleteMapping("/{id}") public ResponseEntity<Void> deletar(@PathVariable Long id) { service.deletar(id); return ResponseEntity.noContent().build(); }
+    @PatchMapping("/{id}/ativar") public ResponseEntity<Void> ativar(@PathVariable Long id) { service.ativar(id); return ResponseEntity.noContent().build(); }
+    @PatchMapping("/{id}/inativar") public ResponseEntity<Void> inativar(@PathVariable Long id) { service.inativar(id); return ResponseEntity.noContent().build(); }
 }
