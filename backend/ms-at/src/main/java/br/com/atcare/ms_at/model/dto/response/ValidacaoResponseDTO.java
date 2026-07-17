@@ -1,6 +1,6 @@
 package br.com.atcare.ms_at.model.dto.response;
 
-import br.com.atcare.ms_at.model.entity.StatusValidacao;
+import br.com.atcare.ms_at.model.enums.StatusValidacao;
 
 import java.time.LocalDateTime;
 

@@ -2,7 +2,7 @@ package br.com.atcare.ms_autenticacao.loader;
 
 import br.com.atcare.core.usuario.auth.dto.UsuarioAuthResponse;
 import br.com.atcare.core.auth.model.AuthenticatedUser;
-import br.com.atcare.ms_autenticacao.service.PessoaService;
+import br.com.atcare.ms_autenticacao.client.PessoaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;

@@ -1,14 +1,21 @@
 package br.com.atcare.ms_pessoa.repository;
 
 import br.com.atcare.ms_pessoa.model.entity.PessoaJuridica;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
-/**
- * Repositório responsável pelo acesso aos dados da entidade {@link PessoaJuridica}.
- */
-@Repository
-public interface PessoaJuridicaRepository extends JpaRepository<PessoaJuridica, Long> { }
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PessoaJuridicaRepository extends JpaRepository<PessoaJuridica, Long> {
+    Optional<PessoaJuridica> findByIdAndAtivoTrue(Long id);
+
+    Optional<PessoaJuridica> findByCnpjAndAtivoTrue(String cnpj);
+
+    boolean existsByCnpj(String cnpj);
+
+    Page<PessoaJuridica> findAllByAtivoTrue(Pageable pageable);
+
+    Page<PessoaJuridica> findByRazaoSocialContainingIgnoreCaseAndAtivoTrue(String razaoSocial, Pageable pageable);
+}
