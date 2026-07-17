@@ -1,6 +1,6 @@
 package br.com.atcare.ms_at.model.dto.request;
 
-import br.com.atcare.ms_at.model.entity.StatusValidacao;
+import br.com.atcare.ms_at.model.enums.StatusValidacao;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;

@@ -42,8 +42,6 @@ public class PessoaRequestFilter extends OncePerRequestFilter {
             }
 
             filterChain.doFilter(request, response);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
         } finally {
             UserContext.clear();
             SecurityContextHolder.clearContext();

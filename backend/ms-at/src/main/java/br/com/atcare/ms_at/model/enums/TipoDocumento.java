@@ -1,0 +1,16 @@
+package br.com.atcare.ms_at.model.enums;
+
+public enum TipoDocumento {
+    CPF,
+    RG,
+    COMPROVANTE_RESIDENCIA,
+    CERTIFICADO,
+    COMPROVANTE_CONCLUSAO_CURSO,
+    HISTORICO_ESCOLAR,
+    CURRICULO,
+    REGISTRO_PROFISSIONAL,
+    DIPLOMA,
+    CNH,
+    FOTO_PERFIL,
+    CARTEIRA_PROFISSIONAL
+}

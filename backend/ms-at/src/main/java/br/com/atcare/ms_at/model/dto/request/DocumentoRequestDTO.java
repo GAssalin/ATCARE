@@ -1,6 +1,6 @@
 package br.com.atcare.ms_at.model.dto.request;
 
-import br.com.atcare.ms_at.model.entity.TipoDocumento;
+import br.com.atcare.ms_at.model.enums.TipoDocumento;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
